@@ -1,11 +1,14 @@
 package com.mygdx.greentower;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class TileMap {
 
 	private int width,
 				height;
 	
-	private MapTile[][] tiles;
+	private List<MapTile[]> rows;
 	
 	
 	
@@ -15,14 +18,17 @@ public class TileMap {
 		this.width = width;
 		this.height = height;
 		
-		tiles = new MapTile[height][width];
+		rows = new LinkedList<MapTile[]>();
 	}
 	
 	public MapTile[] getRow(int y)
 	{
-		return tiles[y];
+		return rows.get(y);
 	}
 	
+	public List<MapTile[]> getRows() {
+		return rows;
+	}
 	
 	public int getWidth() {
 		return width;
