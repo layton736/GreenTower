@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1.1">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>180</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>GamePlayScreen
+--
+-TILE_WIDTH: final int
+-TILE_HEIGHT: final int
+-TILES_HORIZONTAL: final int
+-spritebatch: Spritebatch
+-imgTile: Texture
+-imgPlayer: Texture
+-camera: Camera
+-player: Player
+-tilemap: TileMap
+--
++GamePlayScreen()
++render(delta: float)
++draw(delta: float)
+-drawPlayer()
+-update(delta: float)
++dispose()
+-span(value:float,min:float,max:float)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>612</x>
+      <y>342</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>MapTile
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>114</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>MyGdxGame
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>324</y>
+      <w>174</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+-posRect: Rectangle
+-moveVector: Vector2
+
+--
+
++getMoveVector(): Vector2
++setMoveVector(moveVector: Vector2)
++getPosRect(): Rectangle
++setPosRect(posRect: Rectangle)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>444</x>
+      <y>342</y>
+      <w>138</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>TileMap
+--
+-width: int
+-height: int
+-rows: List&lt;MapTile[]&gt;
+
+--
+
++TileMap(width: int, height: int)
++getRow(y: int): MapTile[]
++getRows(): MapTile[]
++getWidth(): int
++getHeight(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>114</y>
+      <w>78</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Int32Point2D
+--
+
++x:int
++y:int
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>378</x>
+      <y>114</y>
+      <w>264</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>TileMapCamera
+--
+-mapWidth: int
+-mapHeight: int
+-tileSize: int
+-position: Int32Point2D
+
+--
+
++TileMapCamera(mapWidth: int, mapHeight: int, tileSize: int)
++worldToScreen(worldX:int, worldY:int): Int32Point2D
++screenToWorld(screenX: int, screenY: int): Int32Point2D
++worldToTile(worldX: int, worldY: int): Int32Point2D
++tileToWorld(tileX: int, tileY: int): Int32Point2D
++getPosition(): Position
++setPosition(position Int32Point2D): void
++getMapWidth(): int
++getMapHeight(): int
++getTileSize(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>444</x>
+      <y>510</y>
+      <w>174</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>TileMapGenerator
+--
+-map: TileMap
+
+--
+
++TileMapGenerator(map:TileMap)
+-fillMap(): void
++replaceTopRowAtBottom(): void
++generateRow(): MapTile[]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>474</y>
+      <w>18</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>378</y>
+      <w>48</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>636</x>
+      <y>126</y>
+      <w>48</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>156</x>
+      <y>150</y>
+      <w>18</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>168</x>
+      <y>288</y>
+      <w>18</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>228</x>
+      <y>198</y>
+      <w>162</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>228</x>
+      <y>270</y>
+      <w>228</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;430.0;360.0;430.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>228</x>
+      <y>252</y>
+      <w>228</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0;170.0;190.0;360.0;190.0</additional_attributes>
+  </element>
+</diagram>
