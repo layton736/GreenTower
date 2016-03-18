@@ -163,7 +163,7 @@ public class GamePlayScreen extends ScreenAdapter {
 		player.getPosRect().x += player.getMoveVector().x;
 		player.getPosRect().y += player.getMoveVector().y;
 		
-		tileCamera.getPosition().y = (int)(player.getPosRect().x - Gdx.graphics.getBackBufferHeight() / 2);
+		tileCamera.getPosition().y = (int)(player.getPosRect().y - Gdx.graphics.getBackBufferHeight() / 2);
 	}
 
 	
