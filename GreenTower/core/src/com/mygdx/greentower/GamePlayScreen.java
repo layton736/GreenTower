@@ -80,7 +80,7 @@ public class GamePlayScreen extends ScreenAdapter {
 		
 		for(int y = 0; y < tilemap.getHeight(); y++)
 		{
-			for(int x = 0; x < tilemap.getWidth; x++)
+			for(int x = 0; x < tilemap.getWidth(); x++)
 			{
 				
 			}
