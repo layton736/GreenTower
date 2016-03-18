@@ -35,6 +35,8 @@ public class GamePlayScreen extends ScreenAdapter {
 	
 	private Player player;
 	private TileMap tilemap;
+	private TileMapGenerator tilemapGenerator;
+	private TileMapCamera tileCamera;
 	
 	public GamePlayScreen() {
 		spritebatch = new SpriteBatch();
@@ -52,6 +54,9 @@ public class GamePlayScreen extends ScreenAdapter {
 				TILES_HORIZONTAL,
 				(Gdx.graphics.getBackBufferHeight() / TILE_HEIGHT) + 1);
 		
+		tilemapGenerator = new TileMapGenerator(tilemap);
+		
+		tileCamera = new TileMapCamera(tilemap.getWidth(), tilemap.getHeight(), TILE_HEIGHT);
 		
 	}
 	
@@ -85,22 +90,43 @@ public class GamePlayScreen extends ScreenAdapter {
 			
 		}*/
 		
-		for(int y = 0; y < tilemap.getHeight(); y++)
+		List<MapTile[]> maprows = tilemap.getRows();
+		
+		for(int y = 0; y < maprows.size(); y++)
 		{
+			MapTile[] row = maprows.get(y);
+			
 			for(int x = 0; x < tilemap.getWidth(); x++)
 			{
+				MapTile tile = row[x];
+				if(tile != null)
+				{
+					Int32Point2D worldPos = tileCamera.tileToWorld(x, y);
+					Int32Point2D screenPos = tileCamera.screenToWorld(worldPos.x, worldPos.y);
 				
+					spritebatch.draw(
+						imgTile,
+						screenPos.x,
+						screenPos.y,
+						TILE_WIDTH,
+						TILE_HEIGHT);
+				}
 			}
 		}
 		
+		drawPlayer();
+		
+		spritebatch.end();
+	}
+	
+	private void drawPlayer()
+	{
 		spritebatch.draw(
 				imgPlayer,
 				player.getPosRect().x,
 				player.getPosRect().y,
 				player.getPosRect().width,
 				player.getPosRect().height);
-		
-		spritebatch.end();
 	}
 	
 	private void update(float delta)
@@ -136,6 +162,8 @@ public class GamePlayScreen extends ScreenAdapter {
 		
 		player.getPosRect().x += player.getMoveVector().x;
 		player.getPosRect().y += player.getMoveVector().y;
+		
+		tileCamera.getPosition().y = (int)(player.getPosRect().x - Gdx.graphics.getBackBufferHeight() / 2);
 	}
 
 	
