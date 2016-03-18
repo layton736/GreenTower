@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.*;
 
@@ -19,6 +20,11 @@ public class GamePlayScreen extends ScreenAdapter {
 	private static final int TILE_WIDTH = 20;
 	private static final int TILE_HEIGHT = 20;
 	private static final int TILES_HORIZONTAL = 20;
+	private static final float PLAYER_MOVESPEED = 200;
+	private static final float PLAYER_JUMPPOWER = 4;
+	private static final float PLAYER_MAX_SPEED_X = 5;
+	private static final float PLAYER_MAX_SPEED_Y = 5;
+	private static final float GRAVITY = -1f;
 	
 	private SpriteBatch spritebatch;
 	
@@ -39,7 +45,8 @@ public class GamePlayScreen extends ScreenAdapter {
 		imgPlayer = new Texture("player.png");
 		
 		player = new Player();
-		player.setPosRect(new Rectangle(20, 20, 64, 64));
+		player.setPosRect(new Rectangle(20, 200, 64, 64));
+		player.setMoveVector(new Vector2());
 		
 		tilemap = new TileMap(
 				TILES_HORIZONTAL,
@@ -98,18 +105,37 @@ public class GamePlayScreen extends ScreenAdapter {
 	
 	private void update(float delta)
 	{
+		float deltaY = 0;
+		float deltaX = 0;
+		
+		float forceX = 0;
+		float forceY = 0;
+		
 		if(Gdx.input.isKeyPressed(Keys.LEFT))
 		{
-			
+			forceX = -1;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.RIGHT))
 		{
-			
+			forceX = 1;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.SPACE))
 		{
-			
+			//if(player.getMoveVector().y == 0)
+				forceY = 1;
 		}
+		
+		deltaX += forceX * (PLAYER_MOVESPEED * Gdx.graphics.getDeltaTime());
+		deltaY += forceY * (PLAYER_JUMPPOWER * Gdx.graphics.getDeltaTime());
+		
+		deltaY += GRAVITY * Gdx.graphics.getDeltaTime();
+		
+		player.setMoveVector(new Vector2(
+				span(player.getMoveVector().x + deltaX, -PLAYER_MAX_SPEED_X, PLAYER_MAX_SPEED_X),
+				span(player.getMoveVector().y + deltaY, -PLAYER_MAX_SPEED_Y, PLAYER_MAX_SPEED_Y)));
+		
+		player.getPosRect().x += player.getMoveVector().x;
+		player.getPosRect().y += player.getMoveVector().y;
 	}
 
 	
@@ -121,5 +147,15 @@ public class GamePlayScreen extends ScreenAdapter {
 		spritebatch.dispose();
 		
 		super.dispose();
+	}
+	
+	private float span(float value, float min, float max)
+	{
+		if(value > max)
+			return max;
+		else if(value < min)
+			return min;
+		else
+			return value;
 	}
 }
