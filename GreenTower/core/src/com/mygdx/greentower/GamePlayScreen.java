@@ -1,7 +1,5 @@
 package com.mygdx.greentower;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.Input.Keys;
@@ -12,9 +10,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.sun.javafx.font.LogicalFont;
 
-import java.util.*;
+import java.util.List;
 
+/**
+ * The {@link ScreenAdapter} which contains the actual gameplay.
+ */
 public class GamePlayScreen extends ScreenAdapter {
 
 	private static final int TILE_WIDTH = 20;
@@ -38,6 +40,10 @@ public class GamePlayScreen extends ScreenAdapter {
 	private TileMapGenerator tilemapGenerator;
 	private TileMapCamera tileCamera;
 	
+	
+	/**
+	 * Initializes a new instance of the {@link GamePlayScreen} class.
+	 */
 	public GamePlayScreen() {
 		spritebatch = new SpriteBatch();
 		
@@ -70,6 +76,11 @@ public class GamePlayScreen extends ScreenAdapter {
 		super.render(delta);
 	}
 	
+	/**
+	 * Tells the current {@link GamePlayScreen} to draw itself.
+	 * 
+	 * @param delta the time since the last draw call.
+	 */
 	private void draw(float delta)
 	{
 		Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -119,6 +130,9 @@ public class GamePlayScreen extends ScreenAdapter {
 		spritebatch.end();
 	}
 	
+	/**
+	 * Draws the figur of the player.
+	 */
 	private void drawPlayer()
 	{
 		spritebatch.draw(
@@ -129,6 +143,12 @@ public class GamePlayScreen extends ScreenAdapter {
 				player.getPosRect().height);
 	}
 	
+	
+	/**
+	 * Updates the game logic.
+	 * 
+	 * @param delta the time since the last update call.
+	 */
 	private void update(float delta)
 	{
 		float deltaY = 0;
