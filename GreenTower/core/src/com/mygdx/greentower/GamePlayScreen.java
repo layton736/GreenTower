@@ -177,8 +177,8 @@ public class GamePlayScreen extends ScreenAdapter {
 		deltaY += GRAVITY * Gdx.graphics.getDeltaTime();
 		
 		player.setMoveVector(new Vector2(
-				span(player.getMoveVector().x + deltaX, -PLAYER_MAX_SPEED_X, PLAYER_MAX_SPEED_X),
-				span(player.getMoveVector().y + deltaY, -PLAYER_MAX_SPEED_Y, PLAYER_MAX_SPEED_Y)));
+				MathUtils.span(player.getMoveVector().x + deltaX, -PLAYER_MAX_SPEED_X, PLAYER_MAX_SPEED_X),
+				MathUtils.span(player.getMoveVector().y + deltaY, -PLAYER_MAX_SPEED_Y, PLAYER_MAX_SPEED_Y)));
 		
 		player.getPosRect().x += player.getMoveVector().x;
 		player.getPosRect().y += player.getMoveVector().y;
@@ -197,13 +197,5 @@ public class GamePlayScreen extends ScreenAdapter {
 		super.dispose();
 	}
 	
-	private float span(float value, float min, float max)
-	{
-		if(value > max)
-			return max;
-		else if(value < min)
-			return min;
-		else
-			return value;
-	}
+	
 }
