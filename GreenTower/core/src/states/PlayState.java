@@ -11,6 +11,7 @@ import com.mygdx.greentower.GreenTowerGame;
 import com.mygdx.greentower.Int32Point2D;
 import com.mygdx.greentower.MapTile;
 import sprites.Player;
+import sprites.Player.playerState;
 
 import com.mygdx.greentower.TileMap;
 import com.mygdx.greentower.TileMapCamera;

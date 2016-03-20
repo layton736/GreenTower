@@ -3,7 +3,18 @@ package sprites;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 
+import sprites.Player.playerState;
+
 public class Player {
+	
+	//playerStates for handling animations and prevent multiple jumping
+	public enum playerState {
+		idle,
+		jumping,
+		running
+	}
+	//set initial playerState
+	public playerState state;
 
 	//create Gravity on Player only
 	private static final int GRAVITY = -15;
@@ -22,8 +33,11 @@ public class Player {
 	}
 	
 	public void update(float dt){
+		//set the PlayerState
+		setPlayerState();
+		
 		if(position.y > 0){
-			//add gravity by deltatime
+			//add gravity by delta time
 			velocity.add(0, GRAVITY, 0);
 		}
 		
@@ -39,6 +53,8 @@ public class Player {
 		}
 		//reverse scl
 		velocity.scl(1/dt);
+		
+//		System.out.println(state);
 	}
 
 	public Vector3 getPosition() {
@@ -53,12 +69,20 @@ public class Player {
 		velocity.y = 250;
 	}
 	
-	public Vector3 getMoveDirection(){
-		return this.moveDirection;
-	}
-	
 	public void setMoveDirection(Vector3 dir){
 		this.moveDirection = dir;
+	}
+	
+	private void setPlayerState(){
+		if(moveDirection.x == -1.0 || moveDirection.x == 1.0){
+			state = playerState.running;
+		}
+		if(moveDirection.y != 0){
+			//TODO - need collision detection so can check if jumping with velocity.y -> prevent jumping in air
+			state = playerState.jumping;
+		} else if (moveDirection.x == 0.0 && moveDirection.y == 0){
+			state = playerState.idle;
+		}
 	}
 	
 }
