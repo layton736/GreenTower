@@ -30,9 +30,6 @@ public class MenuState extends State{
 	public void update(float dt) {
 		//always check input first
 		handleInput();
-		
-		
-		
 	}
 
 	@Override

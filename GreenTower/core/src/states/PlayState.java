@@ -4,18 +4,12 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.greentower.GreenTowerGame;
 import com.mygdx.greentower.Int32Point2D;
 import com.mygdx.greentower.MapTile;
-import com.mygdx.greentower.MathUtils;
 import sprites.Player;
 
 import com.mygdx.greentower.TileMap;
@@ -29,6 +23,7 @@ public class PlayState extends State{
 	private static final int TILES_HORIZONTAL = 20;
 	
 	private Player player;
+	private Texture bg;
 	
 
 	private TileMap tilemap;
@@ -41,6 +36,8 @@ public class PlayState extends State{
 		super(gsm);	
 		//create player
 		player = new Player(50,300);
+		//set background texture
+		bg = new Texture("bg.png");
 		//only need one camera -> derive from state
 		cam.setToOrtho(false, GreenTowerGame.WIDTH / 2, GreenTowerGame.HEIGHT / 2);
 		
@@ -55,7 +52,10 @@ public class PlayState extends State{
 		tileCamera = new TileMapCamera(tilemap.getWidth(), tilemap.getHeight(), TILE_HEIGHT);
 	}
 
-	//handle the controls here
+	/**
+	 * Handling all the Player inputs here
+	 * 
+	 */
 	@Override
 	protected void handleInput() {
 		if(Gdx.input.isKeyPressed(Keys.SPACE))
@@ -63,10 +63,12 @@ public class PlayState extends State{
 			player.jump();
 		}
 		if(Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.RIGHT)){
-			if(Gdx.input.isKeyPressed(Keys.LEFT)){
+			if(Gdx.input.isKeyPressed(Keys.LEFT))
+			{
 				player.setMoveDirection(new Vector3(-1,0,0));
 			}
-			if(Gdx.input.isKeyPressed(Keys.RIGHT)){
+			if(Gdx.input.isKeyPressed(Keys.RIGHT))
+			{
 				player.setMoveDirection(new Vector3(1,0,0));
 			}
 		} else {
@@ -85,10 +87,8 @@ public class PlayState extends State{
 		//always handle the input first
 		handleInput();
 		player.update(dt);
-		
 		//update the camera position relative to the player
-//		cam.position.x = player.getPosition().x;
-//		cam.position.y = (player.getPosition().y - Gdx.graphics.getBackBufferHeight() / 2);
+		cam.position.y = (player.getPosition().y - Gdx.graphics.getBackBufferHeight() / 2);
 		
 		//TODO - create new platforms here
 		
@@ -109,10 +109,12 @@ public class PlayState extends State{
 		//start packaging
 		sb.begin();
 		//draw background in the middle of the screen
-//		sb.draw(bg, cam.position.x - cam.viewportWidth / 2, 0);
+		sb.draw(bg, cam.position.x - cam.viewportWidth / 2, 0);
 		//draw the player
 		sb.draw(player.getTexture(), player.getPosition().x, player.getPosition().y);
 		
+		
+		//TODO - create Map
 		
 		/*for(Platform platform : platforms)
 		{
