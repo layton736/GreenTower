@@ -1,6 +1,11 @@
 package com.mygdx.greentower;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import states.GameStateManager;
+import states.MenuState;
 
 public class GreenTowerGame extends Game {
 	
@@ -9,13 +14,28 @@ public class GreenTowerGame extends Game {
 	
 	public static final String TITLE = "Green Tower";
 
-	GamePlayScreen gameplayScreen;
+	private GameStateManager gsm;
+	private SpriteBatch batch;
 	
 	@Override
 	public void create() {
 		
-		gameplayScreen = new GamePlayScreen();
+		batch = new SpriteBatch();
+		gsm = new GameStateManager();
 		
-		setScreen(gameplayScreen);
+		//draw background image
+		Gdx.gl.glClearColor(1, 0, 0, 1);
+		//give MenuState to GSM
+		gsm.push(new MenuState(gsm));
+	}
+	
+	@Override
+	//draw the images here
+	public void render () {
+		//wipe the screen
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		//redraw everything
+		gsm.update(Gdx.graphics.getDeltaTime());
+		gsm.render(batch);
 	}
 }
