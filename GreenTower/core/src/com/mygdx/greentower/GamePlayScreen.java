@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.sun.javafx.font.LogicalFont;
+//import com.sun.javafx.font.LogicalFont;
 
 import java.util.List;
 
@@ -131,7 +131,7 @@ public class GamePlayScreen extends ScreenAdapter {
 	}
 	
 	/**
-	 * Draws the figur of the player.
+	 * Draws the figure of the player.
 	 */
 	private void drawPlayer()
 	{

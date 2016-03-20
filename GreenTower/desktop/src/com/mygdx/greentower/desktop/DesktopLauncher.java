@@ -7,6 +7,11 @@ import com.mygdx.greentower.GreenTowerGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		
+		config.width = GreenTowerGame.WIDTH;
+		config.height = GreenTowerGame.HEIGHT;
+		config.title = GreenTowerGame.TITLE;
+		
 		new LwjglApplication(new GreenTowerGame(), config);
 	}
 }
