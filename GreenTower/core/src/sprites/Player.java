@@ -66,7 +66,9 @@ public class Player {
 	}
 	
 	public void jump(){
-		velocity.y = 250;
+		if(state != playerState.jumping){
+			velocity.y = 250;
+		}
 	}
 	
 	public void setMoveDirection(Vector3 dir){
