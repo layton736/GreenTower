@@ -18,7 +18,7 @@ public class TileMapGenerator {
 		List<MapTile[]> rows = map.getRows();
 		rows.clear();
 		
-		for(int y = 0; y < rows.size(); y++)
+		for(int y = 0; y < map.getHeight(); y++)
 		{
 			rows.add(generateRow());
 		}
